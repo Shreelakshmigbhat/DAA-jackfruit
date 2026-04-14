@@ -12,34 +12,52 @@ Randomization is a powerful technique used in algorithms to avoid worst-case sce
 
 # **Task 1: Randomised Quicksort Analysis**
 
+
 Randomised Quicksort selects a pivot uniformly at random.
 
-Let (X_{ij}) be an indicator variable:
+Let `X[i][j]` be an indicator variable:
 
-* (X_{ij} = 1) if elements (i) and (j) are compared
+* `X[i][j] = 1` if elements `i` and `j` are compared
+* `X[i][j] = 0` otherwise
 
-Total comparisons:
-[
-X = \sum_{i<j} X_{ij}
-]
+---
 
-Using linearity of expectation:
-[
-E[X] = \sum_{i<j} E[X_{ij}]
-]
+### **Total Comparisons**
 
-Probability:
-[
-P(X_{ij}) = \frac{2}{j-i+1}
-]
+```
+X = sum over all i < j of X[i][j]
+```
 
-Thus:
-[
-E[X] = O(n \log n)
-]
+---
 
-**Conclusion:**
-Randomization ensures balanced partitions on average, giving expected (O(n \log n)) time.
+### **Using Linearity of Expectation**
+
+```
+E[X] = sum over all i < j of E[X[i][j]]
+```
+
+---
+
+### **Probability of Comparison**
+
+```
+P(X[i][j] = 1) = 2 / (j - i + 1)
+```
+
+---
+
+### **Final Result**
+
+```
+E[X] = sum over all i < j of (2 / (j - i + 1)) = O(n log n)
+```
+
+---
+
+### **Conclusion**
+
+Random pivot selection ensures that the expected number of comparisons in Quicksort is `O(n log n)`, avoiding worst-case behavior.
+
 
 ---
 
