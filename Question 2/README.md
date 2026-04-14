@@ -63,23 +63,51 @@ Random pivot selection ensures that the expected number of comparisons in Quicks
 
 # **Task 2: Deterministic Quicksort Worst Case**
 
-In deterministic Quicksort, pivot selection is fixed.
+In deterministic Quicksort, the pivot is chosen using a fixed rule (e.g., first element, last element, or middle element).
 
-An adversary can construct inputs such that:
+---
 
-* Each partition is maximally unbalanced
+### **Adversarial Input**
 
-Recurrence:
-[
-T(n) = T(n-1) + O(n)
-]
+An adversary can construct input such that:
 
-[
+* Each partition is highly unbalanced
+* One side has 0 elements, the other has (n − 1) elements
+
+Example:
+If pivot = first element and array is already sorted:
+
+```
+[1, 2, 3, 4, 5]
+```
+
+Each step produces:
+
+* Left subtree: empty
+* Right subtree: size (n − 1)
+
+---
+
+### **Recurrence Relation**
+
+```
+T(n) = T(n - 1) + O(n)
+```
+
+---
+
+### **Solving the Recurrence**
+
+```
 T(n) = O(n^2)
-]
+```
 
-**Conclusion:**
-No deterministic comparison-based sorting algorithm can avoid (O(n^2)) worst-case under adversarial inputs.
+---
+
+### **Conclusion**
+
+No deterministic comparison-based sorting algorithm can avoid `O(n^2)` worst-case behavior when an adversary can choose the input based on the pivot strategy.
+
 
 ---
 
