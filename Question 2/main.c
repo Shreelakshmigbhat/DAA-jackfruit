@@ -7,32 +7,55 @@ int main() {
     srand(time(NULL)); // ensures different priorities every run
 
     Node* root = NULL;
+    int n;
+    int keyToSearch;
+    int keyToDelete;
 
-    // Sample input
-    int keys[] = {50, 30, 20, 40, 70, 60, 80};
-    int n = sizeof(keys)/sizeof(keys[0]);
+    printf("Enter the number of elements to insert: ");
+    if (scanf("%d", &n) != 1 || n <= 0) {
+        printf("Invalid number of elements.\n");
+        return 1;
+    }
 
-    // Insert elements
+    printf("Enter %d keys:\n", n);
     for (int i = 0; i < n; i++) {
-        root = insert(root, keys[i]);
+        int key;
+
+        if (scanf("%d", &key) != 1) {
+            printf("Invalid input.\n");
+            freeTree(root);
+            return 1;
+        }
+
+        root = insert(root, key);
     }
 
     printf("Inorder traversal (sorted): ");
     inorder(root);
     printf("\n");
 
-    // Search examples
-    printf("Search 40: %s\n", search(root, 40) ? "Found" : "Not Found");
-    printf("Search 25: %s\n", search(root, 25) ? "Found" : "Not Found");
+    printf("Enter a key to search: ");
+    if (scanf("%d", &keyToSearch) != 1) {
+        printf("Invalid input.\n");
+        freeTree(root);
+        return 1;
+    }
 
-    // Delete example
-    root = deleteNode(root, 50);
+    printf("Search %d: %s\n", keyToSearch, search(root, keyToSearch) ? "Found" : "Not Found");
 
-    printf("After deleting 50: ");
+    printf("Enter a key to delete: ");
+    if (scanf("%d", &keyToDelete) != 1) {
+        printf("Invalid input.\n");
+        freeTree(root);
+        return 1;
+    }
+
+    root = deleteNode(root, keyToDelete);
+
+    printf("After deleting %d: ", keyToDelete);
     inorder(root);
     printf("\n");
 
-    // Free memory
     freeTree(root);
 
     return 0;
