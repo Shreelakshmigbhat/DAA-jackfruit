@@ -65,7 +65,7 @@ void eulerTour(int n) {
     }
 }
 
-// Main function
+// Main logic
 void efficiencyScores(int n, int edges[][2], int values_input[],
                       int queries[], int q) {
 
@@ -96,9 +96,43 @@ void efficiencyScores(int n, int edges[][2], int values_input[],
         prefix[i + 1] = prefix[i] + (isPrime[values[node]] ? 1 : 0);
     }
 
+    printf("\nResults:\n");
     for (int i = 0; i < q; i++) {
         int node = queries[i];
         int ans = prefix[endt[node] + 1] - prefix[start[node]];
-        printf("%d\n", ans);
+        printf("Query node %d -> Prime count = %d\n", node, ans);
     }
+}
+
+// MAIN FUNCTION
+int main() {
+    int n;
+    printf("Enter number of nodes: ");
+    scanf("%d", &n);
+
+    int edges[n - 1][2];
+    printf("Enter %d edges (u v):\n", n - 1);
+    for (int i = 0; i < n - 1; i++) {
+        scanf("%d %d", &edges[i][0], &edges[i][1]);
+    }
+
+    int values_input[n];
+    printf("Enter values of %d nodes:\n", n);
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &values_input[i]);
+    }
+
+    int q;
+    printf("Enter number of queries: ");
+    scanf("%d", &q);
+
+    int queries[q];
+    printf("Enter %d query nodes:\n", q);
+    for (int i = 0; i < q; i++) {
+        scanf("%d", &queries[i]);
+    }
+
+    efficiencyScores(n, edges, values_input, queries, q);
+
+    return 0;
 }
